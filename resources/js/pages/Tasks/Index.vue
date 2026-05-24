@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useForm } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import { useForm, router } from '@inertiajs/vue3'
+import { route } from 'ziggy-js'
 
 const props = defineProps<{
     tasks: Array<{
@@ -38,38 +38,38 @@ const updateStatus = (id: number, status: string) => {
 
 <template>
     <div class="max-w-4xl mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-6">My Tasks</h1>
+        <h1 class="text-2xl font-bold mb-6 text-white">My Tasks</h1>
 
         <!-- Create Task Form -->
         <div class="bg-white rounded-lg shadow p-6 mb-6">
-            <h2 class="text-lg font-semibold mb-4">Add New Task</h2>
+            <h2 class="text-lg font-semibold mb-4 text-gray-900">Add New Task</h2>
             <form @submit.prevent="submit">
                 <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1">Title</label>
+                    <label class="block text-sm font-medium mb-1 text-gray-700">Title</label>
                     <input
                         v-model="form.title"
                         type="text"
-                        class="w-full border rounded px-3 py-2"
+                        class="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 bg-white"
                         placeholder="Task title"
                     />
                     <p v-if="form.errors.title" class="text-red-500 text-sm mt-1">{{ form.errors.title }}</p>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1">Description</label>
+                    <label class="block text-sm font-medium mb-1 text-gray-700">Description</label>
                     <textarea
                         v-model="form.description"
-                        class="w-full border rounded px-3 py-2"
+                        class="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 bg-white"
                         placeholder="Task description"
                     ></textarea>
                 </div>
 
                 <div class="mb-4">
-                    <label class="block text-sm font-medium mb-1">Due Date</label>
+                    <label class="block text-sm font-medium mb-1 text-gray-700">Due Date</label>
                     <input
                         v-model="form.due_date"
                         type="date"
-                        class="w-full border rounded px-3 py-2"
+                        class="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 bg-white"
                     />
                 </div>
 
@@ -91,7 +91,7 @@ const updateStatus = (id: number, status: string) => {
             >
                 <div class="flex justify-between items-start">
                     <div>
-                        <h3 class="font-semibold text-lg">{{ task.title }}</h3>
+                        <h3 class="font-semibold text-lg text-gray-900">{{ task.title }}</h3>
                         <p class="text-gray-600 text-sm">{{ task.description }}</p>
                         <p class="text-gray-400 text-xs mt-1">Due: {{ task.due_date }}</p>
                     </div>
@@ -99,7 +99,7 @@ const updateStatus = (id: number, status: string) => {
                         <select
                             :value="task.status"
                             @change="updateStatus(task.id, ($event.target as HTMLSelectElement).value)"
-                            class="border rounded px-2 py-1 text-sm"
+                            class="border border-gray-300 rounded px-2 py-1 text-sm text-gray-900 bg-white"
                         >
                             <option value="pending">Pending</option>
                             <option value="in_progress">In Progress</option>
@@ -115,7 +115,7 @@ const updateStatus = (id: number, status: string) => {
                 </div>
             </div>
 
-            <p v-if="tasks.length === 0" class="text-gray-500 text-center py-8">
+            <p v-if="tasks.length === 0" class="text-gray-400 text-center py-8">
                 No tasks yet. Add one above!
             </p>
         </div>
